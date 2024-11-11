@@ -1,0 +1,51 @@
+let circle1;
+let circle2;
+
+function setup() {
+  createCanvas(400, 400);
+  
+
+  circle1 = createCircle(100, 200, 50);
+  circle2 = createCircle(250, 200, 75);
+}
+
+function draw() {
+  background(220);
+  
+
+  drawCircle(circle1);
+  drawCircle(circle2);
+  
+
+  if (circlesOverlap(circle1, circle2)) {
+    fill(255, 0, 0); // Red if overlapping
+  } else {
+    fill(0, 255, 0); // Green if not overlapping
+  }
+  
+
+  textSize(32);
+  textAlign(CENTER);
+  text("Overlap Check", width / 2, 50);
+}
+
+
+function createCircle(x, y, r) {
+  return {
+    x: x,
+    y: y,
+    r: r
+  };
+}
+
+
+function drawCircle(c) {
+  fill(200);
+  ellipse(c.x, c.y, c.r * 2, c.r * 2);  // *2 because diameter = 2 * radius
+}
+
+
+function circlesOverlap(c1, c2) {
+  let d = dist(c1.x, c1.y, c2.x, c2.y); // Distance between the centers of the circles
+  return d < (c1.r + c2.r); // Check if the distance is less than the sum of the radii
+}
